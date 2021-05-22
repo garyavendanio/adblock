@@ -9,11 +9,12 @@
 </head>
 <body>
     <div id="x-detect"></div>
-    <div class="x-adblock x-flex x-flex-center x-flex-middle x-height-viewport x-invisible">
+    <div class="x-hidden x-adblock x-flex x-flex-center x-flex-middle x-height-viewport">
         <div class="x-card x-card-secondary x-card-body x-width-1-3 x-border-xrounded x-text-center">
             <span x-icon="icon: alert-triangle; ratio: 2.8"></span>
             <h1 class="x-margin-remove">AdBlock Detected!</h1>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            <button type="button" class="x-button x-button-default x-border-xrounded">Close Message</button>
         </div>
     </div>
     
@@ -21,7 +22,8 @@
     <script src="https://tagsx.dev/static/js/icons.js"></script>
     <script>
         const detect = document.querySelector("#x-detect"),
-        xAdBlock = document.querySelector(".x-adblock");
+        xAdBlock = document.querySelector(".x-adblock"),
+        xButton = document.querySelector("button");
         
         let adClasses = ['ad', 'ads', 'abp', 'adsbox', 'ad-placement', 'doubleclick', 'ad-placeholder', 'ad-badge'];
         for(let item of adClasses){
@@ -29,8 +31,15 @@
         }
 
         let getProperty = window.getComputedStyle(detect).getPropertyValue("display");
-        console.log(getProperty);
-        getProperty === "none" ? xAdBlock.classList.remove("x-invisible") : xAdBlock.classList.add("x-invisible");
+
+        xButton.addEventListener("click", ()=> {
+            xAdBlock.classList.remove("x-hidden")
+        });
+
+        if(xAdBlock.classList.contains("x-hidden")) {
+            console.log(getProperty);
+            getProperty === "none" ? xAdBlock.classList.remove("x-hidden") : xAdBlock.classList.add("x-hidden");
+        }
     </script>
 </body>
 </html>
